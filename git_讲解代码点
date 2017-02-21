@@ -1,0 +1,92 @@
+1.建立git 仓库的２中方法　第一种是git init 第二种是git clone
+  要添加一个新的远程仓库,可以指定一个简单的名字,以便将来引用,运行 git remote add [shortname] [url]:
+2.建立裸仓库
+　　mkdir share.git
+  cd share.git ; git init --bare
+3.objects 目录存储所有数据内容
+　 HEAD文件指向当前分之
+　 refs 目录存储指向数据（分支）的提交对象的指针
+　　index 文件保存了暂存区信息
+　　config 文件包含了项目特有的配置选项
+４.自定义git 快捷方式
+　　　git config user.email test1@gmail.com//当前工作目录
+　　　git config --system user.name "testb"//全局
+　　　git config --global user.name "testone"//用户下
+
+５.底层文件大爆料
+　　 mkdir testobject;cd testobject;
+   vi test.txt;
+   find .git/object type -f;
+   下面有一个文件　
+   git cat-file -p SHA-1
+   git cat-file -t SHA-1 
+   存储的并不是文件名而仅仅是文件内容。这种对象类型称为 blob
+　　 tree 对象可以存储文件名，同时也允许存储一组文件
+
+6.合并分支
+  1.git checkout master;
+  2.git checkout -b newbranch
+  3.vi one.txt
+  4.git add .;git commit -m "one"
+  5.git checkout master;git merge newbranch
+  
+fast-forward
+another.txt
+
+7.git branch --set-upstream-to=origin/<branch> develop 
+
+
+8.删除远程分支
+　　git branch -r -d origin/branch-name
+　　git push origin :branch-name
+
+  git branch -r -d origin/branch-name
+
+9.Merge made by the 'recursive' strategy
+  “递归”策略合并
+
+11.git config --global alias.st status
+
+10.记录合并
+　　 master :   111111
+              222b22
+   newbranch :  1111a1
+                222222
+
+   git checkout master ; git merge newbranch
+ 　冲突
+　　　master :......
+           3333d3
+　　　
+   newbranch : 111a111
+               .......
+   不冲突
+
+　　　master :11a111
+           ......
+   newbranch :111111
+              222222
+              333333
+              444444
+              ffffff
+              666666
+   git chekcout master;git merge newbranch
+   不冲突
+
+　　　master  :....
+           555555
+           ffffff
+           666666
+   newbranch : ........
+               555dd5
+               666666
+  　冲突
+
+　　　master : .......
+            5555555
+            8888888
+            6666666
+   newbranch : .......
+               4ddd444
+   不冲突
+
